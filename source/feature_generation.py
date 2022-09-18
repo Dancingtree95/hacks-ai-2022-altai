@@ -7,7 +7,7 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import cross_val_predict
 
-from utils import equiprob_bin_edges
+from source.utils import equiprob_bin_edges
 
 class NB_text_to_numeric():
     def __init__(self, analyzer='char_wb', ngram_range = (4,4), min_df = 5):

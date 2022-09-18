@@ -34,7 +34,6 @@ def cross_val_catboost(catboost_config, X, Y, cat_cols, transformers = None, n_s
     train_scores = []
     test_scores = []    
     models = []
-    i = 0
     for tr_id, ts_id in kf.split(X, Y):
         model = CatBoostClassifier(**catboost_config)
         X_tr, Y_tr = X.iloc[tr_id], Y.iloc[tr_id]
@@ -56,8 +55,5 @@ def cross_val_catboost(catboost_config, X, Y, cat_cols, transformers = None, n_s
         train_scores.append(f1_score(Y.iloc[tr_id], pr_tr, average=average))
         test_scores.append(f1_score(Y.iloc[ts_id], pr_ts, average=average))
         models.append(model.copy())
-        i += 1
-        if i == 100:
-            break
 
     return {'train' : train_scores, 'test' : test_scores, 'models' : models}
